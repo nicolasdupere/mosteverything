@@ -1,12 +1,22 @@
-.title {
 
+
+.title {
+    width: 400px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    font-size: 2em;
 }
 .subtitle {
-
+    width: 400px;
+    display: block;
+    text-align: center;
+    margin: auto;
 }
 .content {
-
+ font-size: 12px;
 }
 .emph {
+    font-style: italic;
 
 }
