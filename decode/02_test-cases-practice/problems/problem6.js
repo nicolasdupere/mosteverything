@@ -3,12 +3,16 @@ var assert = require('assert');
 
 // we need 6 test cases. 
 let inputs = [
-  ["add", 10, 20],
-  ["chair", 20, 10]
+  ["add", 30, 20],
+  ["mult", 40, 10],
+  ["sub", 30, 20],
+  ["add", 30, 10],
+  ["mult", 10, 7],
+  ["", 49, 10]
 ]
 
 let outputs = [
-  30
+  50, 400, 10, 40, 70, undefined
 ]
 
 /*
@@ -22,12 +26,23 @@ f(["spoof", 10, 10]); // undefined
 
 */
 function f(arr) {
+    console.log(arr);
+    if (arr[0] === "add") {
+      return arr[1] + arr[2]
+    } if (arr[0] === "mult") {
+      return arr[1] * arr[2]
+    } if (arr[0] === "sub") {
+      return arr[1] - arr[2]
+    }
+    return undefined;
     
 }
 
 function runTest(i) {
     if(i > inputs.length) throw new Error("You do not have enough test cases");
     var expected = outputs[i];
+    console.log(expected);
+    
     var actual = f(inputs[i]);
     assert.deepEqual(actual, expected);
 }
@@ -38,3 +53,4 @@ runTest(2);
 runTest(3);
 runTest(4);
 runTest(5);
+console.log("test cases passed");
