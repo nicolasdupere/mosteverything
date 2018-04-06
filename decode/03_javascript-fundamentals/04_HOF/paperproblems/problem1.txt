@@ -22,9 +22,9 @@ function isOdd(x) {
     else return false;
 }
 
-filter(evenNumbers, isEven) => [2, 4, 6, 8, 10]
-filter(evenNumbers, isOdd)  => []
-filter(oddNumbers, isEven)  => []
-filter(oddNumbers, isOdd)   => [3, 5, 7, 9]
-filter(someNumbers, isEven) => [2, 4]
-filter(someNumbers, isOdd)  => [1, 3]
+filter(evenNumbers, isEven) => [2, 4, 6, 8, 10] // 2 parameters, array/function, return true
+filter(evenNumbers, isOdd)  => [] // 2 parameters, array/function, return false
+filter(oddNumbers, isEven)  => [] // 2 parameters, array/function, return true
+filter(oddNumbers, isOdd)   => [3, 5, 7, 9] // 2 parameters, array/function, return false
+filter(someNumbers, isEven) => [2, 4] // 2 parameters, array/function, return true
+filter(someNumbers, isOdd)  => [1, 3] // 2 parameters, array/function, return false

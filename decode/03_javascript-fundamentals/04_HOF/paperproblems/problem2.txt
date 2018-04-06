@@ -25,8 +25,10 @@ function triple(x) {
     return x * 3;
 }
 
-map(someNumbers, double) => [2, 4, 6, 8]
-map(someNumbers, triple) => [3, 6, 9, 12]
+map(someNumbers, double) => [2, 4, 6, 8] // 2 parameters, array/function, function double return double array
+map(someNumbers, triple) => [3, 6, 9, 12] // 2 parameters, array/function, function triple return triple array
 
-map(someStrings, toUpperCase) => ["BOB", "ERIC"]
-map(someStrings, toLowerCase) => ["bob", "eric"]
+map(someStrings, toUpperCase) => ["BOB", "ERIC"] // 2 parameters, array/function, function toUpperCase return toUpperCase array
+
+map(someStrings, toLowerCase) => ["bob", "eric"] // 2 parameters, array/function, function toLowerCase return toLowerCase array
+

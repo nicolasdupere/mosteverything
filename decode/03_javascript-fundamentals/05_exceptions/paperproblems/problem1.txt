@@ -13,3 +13,5 @@ function g() {
 }
 
 g();
+
+// output 500
