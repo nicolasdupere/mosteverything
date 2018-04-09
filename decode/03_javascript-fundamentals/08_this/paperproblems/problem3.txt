@@ -12,6 +12,6 @@ var obj2 = {
     baz: 12
 }
 
-obj2.bar = obj.bar;
+obj2.bar = obj.bar;  // reassign the value
 obj2.bar();
 
