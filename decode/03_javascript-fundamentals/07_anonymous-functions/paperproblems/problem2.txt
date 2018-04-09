@@ -3,7 +3,7 @@ In other words, replace all the function definitions with anonymous functions
 The final program should be on a single line
 
 
-function greet(x) {
+var greet = function (x) {
     console.log("hello " + x);
 }
 
@@ -12,3 +12,6 @@ function call(f) {
 }
 
 call(greet);
+
+(function (f) {f("bob")})(function(x){console.log("hello " + x);})
+
