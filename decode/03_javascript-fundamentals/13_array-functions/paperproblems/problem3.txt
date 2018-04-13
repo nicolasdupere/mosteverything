@@ -11,3 +11,6 @@ var animalNames = animals.map(
                     function(animal) {return animal.name});
 
 console.log(animalNames.join());
+
+// Output
+// "Nacho,Ramses,Flufftail,Popcorn,Neckbeard,"
