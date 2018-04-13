@@ -17,3 +17,18 @@ f) (x) => x * 2
 e) () => console.log("hello")
 
 When you're done, check all your answers in the developer console.
+
+
+a) (x) => x + 1;
+
+b) (x, y) => x * y;
+
+c) (x) => { x * 2 }
+
+d) (x, z) => {console.log(z); return x * z}
+
+e) (x) => { console.log(z); return x * z; }
+
+f) (x) => x * 2;
+
+e) () => console.log("hello")
