@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+        #btn {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body id="main">
+    <div id="app"></div>
+    <button id="btn">click!</button>
+
+    <script>
+        var won = false;
+        var lost = false;
+        var mainDiv = document.getElementById('app');
+        var body = document.getElementById('main');
+        var btn = document.getElementById('btn');
+        btn.style.display = "none";
+        btn.style.left = (100 + Math.random() * 400) + 'px';
+        btn.style.top = (100 + Math.random() * 400) + 'px';  
+
+        // prestart
+        setTimeout(startRound, Math.random() * 2000 + 1000);
+        // prestart
+
+        function potentialLoss() {
+            if (won === true) return;
+            lost = true;
+            mainDiv.innerText = "YOU LOST!";
+        }
+
+        function potentialWin() {
+            if (lost === true) return;
+            won = true;
+            mainDiv.innerText = "YOU WON!";
+        }
+
+        function startRound() {
+            mainDiv.innerText = "ROUND STARTED!";
+            btn.style.display = "";
+            
+            btn.addEventListener('click', () => {
+                potentialWin();
+            })
+            body.addEventListener('click', () => {
+                potentialLoss();
+            })
+            setTimeout(potentialLoss, 1500)
+        }
+
+        
+    </script>
+</body>
+
+</html>

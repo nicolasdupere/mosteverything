@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+   :root {
+    --main-color:#06c;
+    --main-height: 100px;
+    }
+
+    #foo {
+    background-color: var(--main-color);
+    }
+
+    .button {
+        width: 200px;
+        height: var(--main-height);
+        color: blue;
+        font-size: 20px;
+    }
+</style>
+</head>
+<body>
+    
+    <div id="foo">
+        <button id="box" class="button" onclick="nico()">Click me fast!</button>
+    </div>
+    <script>
+    var boxWidth = document.getElementsByClassName("button")[0];
+    console.log("Box Width " + boxWidth.offsetWidth);
+    console.log("Box Height " + boxWidth.offsetHeight);
+    
+    var startPointW = 0;
+    var startPointH = 0;
+    var spaceW = window.innerWidth - boxWidth.offsetWidth;
+    var spaceH = window.innerHeight - boxWidth.offsetHeight;
+    var widthW = Math.floor((Math.random() * spaceW) + startPointW);
+    var widthH = Math.floor((Math.random() * spaceH) + startPointH);
+    // console.log("Random widthW " + widthW);
+    // console.log("Random widthH " + widthH);
+    // console.log("Start width " + startPointW);
+    // console.log("Start height " + startPointH);
+    // console.log("width " + spaceW);
+    // console.log("height " + spaceH);
+    
+    document.getElementById("box").style = `background-color : green; margin-left: ${widthW}px; margin-top: ${widthH}px;`;
+    
+
+    </script>
+</body>
+</html>
