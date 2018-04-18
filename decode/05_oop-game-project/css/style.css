@@ -1,0 +1,75 @@
+body {
+    margin: 0px;
+    background-image: url("../images/backgroundStart.png");
+    background-repeat: no-repeat;
+    background-color: #142c69; 
+}
+
+.wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+hr {
+    opacity: 0.2;
+}
+
+.imgStart {
+    width: 120px;
+    
+   
+}
+
+.end {
+    font-size: 3em;
+    
+}
+
+
+.backgroundStart {
+   
+}
+
+#container1 {
+    display: none;
+    
+}
+
+.containerStart {
+    color: white;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.containerReStart {
+    color: white;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+   
+   
+}
+
+
+
+#app {
+    display: inline-block;
+}
+
+.btn {
+    width: 300px;
+    height: 50px;
+    background-color: #2086c7;
+    border:3px solid white;
+    border-radius: 5px;
+    font-size: 2em;
+    color: white;
+    cursor: pointer;
+
+}
+
+.btn:hover {
+ background-color: #f04ffa;
+}

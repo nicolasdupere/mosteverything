@@ -1,13 +1,13 @@
 // This sectin contains some game constants. It is not super interesting
-var GAME_WIDTH = 1350;
-var GAME_HEIGHT = 750;
+var GAME_WIDTH = 1275;
+var GAME_HEIGHT = 500;
 
-var ENEMY_WIDTH = 150;
+var ENEMY_WIDTH = 75;
 var ENEMY_HEIGHT = 156;
 var MAX_ENEMIES = 3;
 
-var PLAYER_WIDTH = 150;
-var PLAYER_HEIGHT = 278;
+var PLAYER_WIDTH = 75;
+var PLAYER_HEIGHT = 54;
 
 // These two constants keep us from using "magic numbers" in our code
 var LEFT_ARROW_CODE = 37;
@@ -17,26 +17,15 @@ var RIGHT_ARROW_CODE = 39;
 var MOVE_LEFT = 'left';
 var MOVE_RIGHT = 'right';
 
-// Start Music
-
-var waitaudio = new Audio('music/waitMusic.mp3');
-waitaudio.loop = true;
-waitaudio.play();
-
-// Background Music
-var audio = new Audio('music/winter.mp3');
-
-// End Game Audio Effect
-var endaudio = new Audio('music/endGame.mp3');
-endaudio.volume = 0.4;
-
 // Preload game images
 var images = {};
-['enemy.png', 'stars.png', 'player_left.png', 'player_right.png'].forEach(imgName => {
+['enemy.png', 'stars.png', 'player.png'].forEach(imgName => {
     var img = document.createElement('img');
     img.src = 'images/' + imgName;
     images[imgName] = img;
 });
+
+
 
 
 
@@ -57,32 +46,28 @@ class Enemy {
 
     render(ctx) {
         ctx.drawImage(this.sprite, this.x, this.y);
-
     }
 }
 
 class Player {
     constructor() {
-        this.x = 4 * PLAYER_WIDTH;
+        this.x = 2 * PLAYER_WIDTH;
         this.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
-        this.sprite = images['player_left.png'];
-
+        this.sprite = images['player.png'];
     }
 
     // This method is called by the game engine when left/right arrows are pressed
     move(direction) {
         if (direction === MOVE_LEFT && this.x > 0) {
             this.x = this.x - PLAYER_WIDTH;
-            this.sprite = images['player_left.png'];
-        } else if (direction === MOVE_RIGHT && this.x < GAME_WIDTH - PLAYER_WIDTH) {
+        }
+        else if (direction === MOVE_RIGHT && this.x < GAME_WIDTH - PLAYER_WIDTH) {
             this.x = this.x + PLAYER_WIDTH;
-            this.sprite = images['player_right.png'];
         }
     }
 
     render(ctx) {
         ctx.drawImage(this.sprite, this.x, this.y);
-
     }
 }
 
@@ -105,10 +90,9 @@ class Engine {
 
         // Setup the <canvas> element where we will be drawing
         var canvas = document.createElement('canvas');
-        canvas.id = 'canvas'
         canvas.width = GAME_WIDTH;
         canvas.height = GAME_HEIGHT;
-        element.appendChild(canvas).className = "canvas";
+        element.appendChild(canvas);
 
         this.ctx = canvas.getContext('2d');
 
@@ -125,10 +109,10 @@ class Engine {
             this.enemies = [];
         }
 
-        while (this.enemies.filter(e => !!e).length < MAX_ENEMIES) {
+        while (this.enemies.filter(e => !!e).length < MAX_ENEMIES ) {
             this.addEnemy();
         }
-
+        
     }
 
     // This method finds a random spot where there is no enemy, and puts one in there
@@ -136,34 +120,28 @@ class Engine {
         var enemySpots = GAME_WIDTH / ENEMY_WIDTH;
         //console.log("var " + enemySpots)
         var enemySpot;
-
+        
         // Keep looping until we find a free enemy spot at random
         while (!enemySpot && this.enemies[enemySpot]) {
             enemySpot = Math.floor(Math.random() * enemySpots);
-
+            
         }
-
+            
         this.enemies[enemySpot] = new Enemy(enemySpot * ENEMY_WIDTH);
-
+      
     }
 
     // This method kicks off the game
     start() {
-        console.log(this.isPlayerDead());
-
         this.score = 0;
         this.lastFrame = Date.now();
-
-
-
-        // var audio = new Audio('music/winter.mp3');
-        // audio.play();
 
         // Listen for keyboard left/right and update the player
         document.addEventListener('keydown', e => {
             if (e.keyCode === LEFT_ARROW_CODE) {
                 this.player.move(MOVE_LEFT);
-            } else if (e.keyCode === RIGHT_ARROW_CODE) {
+            }
+            else if (e.keyCode === RIGHT_ARROW_CODE) {
                 this.player.move(MOVE_RIGHT);
             }
         });
@@ -184,18 +162,17 @@ class Engine {
 
 
     gameLoop() {
-
-
         // Check how long it's been since last frame
         var currentFrame = Date.now();
         var timeDiff = currentFrame - this.lastFrame;
-
+        
         // Increase the score!
         this.score += timeDiff;
 
         // Call update on all enemies
         this.enemies.forEach(enemy => enemy.update(timeDiff));
-
+        // console.log("player" + this.player);
+        // console.log("enemies" + this.enemies);
 
         // Draw everything!
         this.ctx.drawImage(images['stars.png'], 0, 0); // draw the star bg
@@ -207,35 +184,19 @@ class Engine {
             if (enemy.y > GAME_HEIGHT) {
                 delete this.enemies[enemyIdx];
             }
-
+            
         });
         this.setupEnemies();
 
         // Check if player is dead
         if (this.isPlayerDead()) {
-            var tempCanvas = document.getElementById("canvas")
-            tempCanvas.parentNode.removeChild(tempCanvas)
-            document.getElementById("container1").style.display = "inline";
-
-
             // If they are dead, then it's game over!
-            // this.ctx.font = 'bold 30px Impact';
-            // this.ctx.fillStyle = '#ffffff';
-            this.ctx.fillText(this.score + ' THE END', 5, 30);
-            audio.pause();
-            endaudio.play();
-            document.getElementById("myBtn1").addEventListener("click", function () {
-
-                var gameEngine = new Engine(document.getElementById('app'));
-
-                document.getElementById("container1").style.display = "none";
-                document.getElementById("container").style.display = "none";
-                waitaudio.pause();
-                audio.play();
-                gameEngine.start();
-
-            });
-        } else {
+            this.ctx.font = 'bold 30px Impact';
+            this.ctx.fillStyle = '#ffffff';
+            this.ctx.fillText(this.score + ' GAME OVER', 5, 30);
+            
+        }
+        else {
             // If player is not dead, then draw the score
             this.ctx.font = 'bold 30px Impact';
             this.ctx.fillStyle = '#ffffff';
@@ -243,31 +204,20 @@ class Engine {
 
             // Set the time marker and redraw
             this.lastFrame = Date.now();
-
+            
             requestAnimationFrame(this.gameLoop);
-
+            
         }
-
     }
 
     isPlayerDead() {
         // TODO: fix this function!
-        return (this.enemies.some((element, index) => {
-            return (this.player.x === element.x &&
-                this.player.y + 150 > element.y &&
-                this.player.y - 150 < element.y)
-        }))
-
+        //console.log("player" + this.player);
+        //console.log("enemies" + this.enemies);
+        return false;
     }
-
 }
 
 // This section will start the game
 var gameEngine = new Engine(document.getElementById('app'));
-
-document.getElementById("myBtn").addEventListener("click", function () {
-    document.getElementById("container").style.display = "none";
-    waitaudio.pause();
-    audio.play();
-    gameEngine.start();
-});
+gameEngine.start();

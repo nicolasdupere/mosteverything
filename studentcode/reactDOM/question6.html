@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <script>
+    function timeString() {
+      return new Date().toLocaleTimeString()
+    }
+    class Time extends React.Component {
+      constructor() {
+        super();
+        this.state = { currentTime: timeString() }
+        setInterval(
+          () => this.setState({ currentTime: timeString() }),
+          1000)
+      }
+      render() {
+        return React.createElement("div", null, this.state.currentTime)
+      }
+    }
+    var rootdiv = document.getElementById('root');
+    var elem = React.createElement(Time);
+    ReactDOM.render(elem, rootdiv);
+    </script>
+</body>
+</html>
+
+
+
